@@ -170,18 +170,24 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		@Override
 		public void remove() {
+			/**
+			 * Although it is already stated in the interface documentation, I need to point this out:
+			 * The element that will be removed is the last one returned, not the one the iterator is pointing to.
+			 */
 			if(!allowDelete) throw new IllegalStateException(
 				"Next method has not yet been called, or the remove method has already been called after the last call to the next method."
 			);
+			assert(currentPosition > 0); // currentPosition can't be zero at this point
 			
-			if(currentPosition == 0){
+			if(currentPosition == 1){
 				head = head.next;
 			} else {
 				SinglyLinkedElement deleteCursor = head;
-				for(int i = 0; i < currentPosition; i++){
+				// point the deleteCursor to the element before the element that should be deleted
+				for(int i = 1; i < (currentPosition - 1); i++){
 					deleteCursor = deleteCursor.next;
 				}
-				deleteCursor.next = deleteCursor.next.next;
+				deleteCursor.next = deleteCursor.next.next; // exclude the element
 			}
 			allowDelete = false; // allow deleting only once per next-cycle
 		}
