@@ -146,7 +146,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		private SinglyLinkedElement head = null;
 		private SinglyLinkedElement cursor = null;
 		private int currentPosition = 0; //needed for deletion, allows duplicate elements
-		private boolean allowDelete = false;
+		private boolean allowDelete = false; // deleting allowed after first call of next()-method
 		
 		public SinglyLinkedListIterator(SinglyLinkedElement head){
 			this.cursor = head;
